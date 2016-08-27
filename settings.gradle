@@ -1,0 +1,6 @@
+include ':pebble'
+include ':common'
+def jetpackFolder =
+        (hasProperty("jetpack-embedded") && getProperty("jetpack-embedded")) ? "jetpack/" : ""
+project(':pebble').projectDir = new File("${jetpackFolder}pebble")
+project(':common').projectDir = new File("${jetpackFolder}common")
