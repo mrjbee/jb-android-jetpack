@@ -11,22 +11,26 @@ public class Logger {
     }
 
     public void i(String message){
-        Log.i(tag, message);
+        Log.i(tag, bake_message(message));
+    }
+
+    private String bake_message(String message) {
+        return "["+Thread.currentThread().getName()+":"+Thread.currentThread().getId()+"]" + message;
     }
 
     public void w(String message){
-        Log.w(tag, message);
+        Log.w(tag, bake_message(message));
     }
 
     public void w(String message, Throwable throwable){
-        Log.w(tag, message, throwable);
+        Log.w(tag, bake_message(message), throwable);
     }
 
     public void e(String message){
-        Log.e(tag, message);
+        Log.e(tag, bake_message(message));
     }
 
     public void e(String message, Throwable throwable){
-        Log.e(tag, message, throwable);
+        Log.e(tag, bake_message(message), throwable);
     }
 }
