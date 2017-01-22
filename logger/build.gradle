@@ -18,8 +18,4 @@ android {
     }
 }
 
-dependencies {
-    compile 'com.getpebble:pebblekit:3.1.0'
-    compile project(":common")
-    compile project(":logger")
-}
+dependencies {}

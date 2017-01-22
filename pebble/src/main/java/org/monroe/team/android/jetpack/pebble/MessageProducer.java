@@ -53,7 +53,10 @@ public class MessageProducer {
         if (isSameAsAwaitingTransaction(transactionId)){
             Callback curCallback = mAwaitingCallback;
             cleanAwaitingState();
+            ModuleConstants.PEBBLE_LOGGER.i("Ack for T-ID:"+transactionId);
             curCallback.onSuccess();
+        } else {
+            ModuleConstants.PEBBLE_LOGGER.e("Unexpected ack for T-ID:"+transactionId);
         }
     }
 
@@ -61,7 +64,10 @@ public class MessageProducer {
         if (isSameAsAwaitingTransaction(transactionId)){
             Callback curCallback = mAwaitingCallback;
             cleanAwaitingState();
+            ModuleConstants.PEBBLE_LOGGER.w("Nack for T-ID:"+transactionId);
             curCallback.onFail();
+        } else {
+            ModuleConstants.PEBBLE_LOGGER.e("Unexpected nack for T-ID:"+transactionId);
         }
     }
 
@@ -80,6 +86,7 @@ public class MessageProducer {
 
         mAwaitingTransactionId = new Random().nextInt(250);
         mAwaitingCallback = callback;
+        ModuleConstants.PEBBLE_LOGGER.i("Post message with T-ID:"+mAwaitingTransactionId);
         PebbleKit.sendDataToPebbleWithTransactionId(mContext, appUuid, dictionary, mAwaitingTransactionId);
 
         return 0;
